@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div style="display: flex; gap: 200px;">
+        <div id="task1" draggable="true">
+            Task 1
+        </div>
+
+        <div id="container" style="width: 200px; height: 200px; border: 1px solid black;">
+            Drop here
+        </div>
+    </div>
+</body>
+
+<script>
+    let task1 = document.getElementById("task1");
+    const container = document.getElementById("container");
+
+    task1.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", "Utkarsh");
+        console.log("Which element is being dragged?", e.target);
+    })
+
+    container.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    })
+
+    container.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData("text/plain");
+        console.log(data)
+        container.appendChild(task1);
+    })
+
+    container.addEventListener("dragend", (e) => {
+        e.preventDefault();
+        console.log("Drag ended");
+    })
+</script>
+
+</html>
